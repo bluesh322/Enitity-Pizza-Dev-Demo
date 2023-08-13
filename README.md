@@ -5,10 +5,10 @@ Entity Framework Pizza Demo Dev Environment
 
 # Setup
 ## Tools and Env
-VS 2019 (C#)
-Microsoft SQL Server
-Microsoft SQL Server Management Studio
-Docker
+* VS 2019 (C#)
+* Microsoft SQL Server
+* Microsoft SQL Server Management Studio
+* Docker
 
 ## Repo Copy Setup
 
