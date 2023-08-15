@@ -13,55 +13,55 @@ namespace BookStoresWebAPI.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class PublishersController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly BookStoresDbContext _context;
 
-        public PublishersController(BookStoresDbContext context)
+        public UsersController(BookStoresDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Publishers
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Publisher>>> GetPublishers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-          if (_context.Publishers == null)
+          if (_context.Users == null)
           {
               return NotFound();
           }
-            return await _context.Publishers.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Publishers/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Publisher>> GetPublisher(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-          if (_context.Publishers == null)
+          if (_context.Users == null)
           {
               return NotFound();
           }
-            var publisher = await _context.Publishers.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
-            if (publisher == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return publisher;
+            return user;
         }
 
-        // PUT: api/Publishers/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPublisher(int id, Publisher publisher)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != publisher.PubId)
+            if (id != user.UserId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(publisher).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace BookStoresWebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PublisherExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -82,44 +82,44 @@ namespace BookStoresWebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Publishers
+        // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Publisher>> PostPublisher(Publisher publisher)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.Publishers == null)
+          if (_context.Users == null)
           {
-              return Problem("Entity set 'BookStoresDbContext.Publishers'  is null.");
+              return Problem("Entity set 'BookStoresDbContext.Users'  is null.");
           }
-            _context.Publishers.Add(publisher);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPublisher", new { id = publisher.PubId }, publisher);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Publishers/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePublisher(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            if (_context.Publishers == null)
+            if (_context.Users == null)
             {
                 return NotFound();
             }
-            var publisher = await _context.Publishers.FindAsync(id);
-            if (publisher == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Publishers.Remove(publisher);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PublisherExists(int id)
+        private bool UserExists(int id)
         {
-            return (_context.Publishers?.Any(e => e.PubId == id)).GetValueOrDefault();
+            return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
     }
 }

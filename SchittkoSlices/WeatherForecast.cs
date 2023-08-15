@@ -1,4 +1,4 @@
-namespace BookStoresWebAPI
+namespace SchittkoSlices
 {
     public class WeatherForecast
     {
